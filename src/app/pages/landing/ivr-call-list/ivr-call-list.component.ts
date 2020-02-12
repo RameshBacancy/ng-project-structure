@@ -35,6 +35,7 @@ export class IvrCallListComponent implements OnInit {
     }
   ];
   numberLists: NumberList[];
+  selectSubmitted:boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -48,7 +49,10 @@ export class IvrCallListComponent implements OnInit {
     });
   }
 
+  get s() { return this.typeForm.controls; }
+
   onTypeSearchSubmit(): void {
+    this.selectSubmitted = true;
     if (this.typeForm.valid) {
       this.numberLists = [];
       this._numberListService.getNumbersByType(this.typeForm.controls['type'].value)
